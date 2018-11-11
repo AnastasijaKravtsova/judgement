@@ -41,4 +41,4 @@ https://drive.google.com/drive/folders/1mWKQJaFDM0sAwwOXW9AuoBrnDmzPBnZ8
 
 #### Отчетность
 
-TBD
+* [05.11 -- первый созвон с кураторами](reports/report_05112018.md)
