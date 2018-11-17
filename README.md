@@ -11,7 +11,7 @@
 
 В *долговременной* перспективе: проанализировать корреляции между разными сущностями в судебных актах.
 
-[Подробнее](https://github.com/jackashore/judgement/blob/master/reports/report_05112018.md)
+Подробнее о целях проекта можно почитать [в протоколе первой встречи с кураторами](https://github.com/jackashore/judgement/blob/master/reports/report_05112018.md)
 
 ###### Задачи
 
@@ -20,9 +20,9 @@
 
 ###### Материалы
 
-~10 млн. неразмеченных документов приговоров
+[~10 млн. неразмеченных приговоров](https://www.dropbox.com/sh/3h6fpq94z8ljt8z/AACl_c5wAE6a4uQt9Zhy2iXQa?dl=0&preview=sou.tar)
 
-~1.5 тыс. размеченных дел
+[~1.5 тыс. размеченных дел](https://www.dropbox.com/sh/31j60nca3u20uwb/AABMZ_honfEUDoEDHA788PUja?dl=0)
 
 #### Участники проекта
 
@@ -43,11 +43,11 @@
 
 #### Ближайшие задачи
 
-##### 15.11.2018: оформление гитхаба
+##### ~~15.11.2018: оформление гитхаба~~
 
 ##### 21.11.2018: подготовка и сдача презентации для выступления на НИСе
 
-https://drive.google.com/drive/folders/1mWKQJaFDM0sAwwOXW9AuoBrnDmzPBnZ8
+Подготовка презентации происходит [здесь](https://drive.google.com/drive/folders/1mWKQJaFDM0sAwwOXW9AuoBrnDmzPBnZ8)
 
 ##### 23.11.2018: выступление на НИСе про видение проекта:
 
