@@ -22,9 +22,7 @@ https://users.nber.org/~dlchen/papers/Precedent_vs_Politics.pdf
 
 #### Similarity Analysis of Legal Judgments (маленькая)
 
-https://www.researchgate.net/profile/Polepalli_Krishna_Reddy/publication/221232979_Si
-milarity_analysis_of_legal_judgments/links/0c9605260ddd98fc52000000/Similarity-anal
-ysis-of-legal-judgments.pdf
+https://www.researchgate.net/profile/Polepalli_Krishna_Reddy/publication/221232979_Similarity_analysis_of_legal_judgments/links/0c9605260ddd98fc52000000/Similarity-analysis-of-legal-judgments.pdf
 
 #### Finding Similar Legal Judgements Under Common Law System (побольше)
 
