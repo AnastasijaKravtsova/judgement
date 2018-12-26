@@ -3,6 +3,16 @@
 
 ### О проекте
 
+#### ТЗ
+
+Текст:
+
+https://docs.google.com/document/d/1i3k533W2JMMCCtro5mtgx0lStA497h1cLaNosHvdeJM/edit
+
+Таблица с этапами:
+
+https://docs.google.com/spreadsheets/d/1oT0ytEouY_lP88KTRRGP-RJZBKslRudJk7iLxp4dC7k/edit#gid=0
+
 #### Цели и материалы проекта
 
 ###### Основная цель проекта
@@ -40,10 +50,6 @@
 
 - Андрей Заякин:  a.zayakin@gmail.com
 - Михаил Копотев: mihail.kopotev@gmail.com
-
-#### Ближайшие задачи
-
-##### 08.12.2018: выступление на НИСе с обзором статей
 
 #### Время созвона: понедельник, между 9 и 10 вечера
 
