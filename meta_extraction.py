@@ -60,57 +60,77 @@ def get_names(line):
     return name
 
 def splitting_text(path):
+    lines = []
     trouble_counter = 0
     text = get_parts(parse_xml(path)[1])[1]
-    lines = [line for line in text.split(",") if line.strip()]
+    text = text.split("с участием")
+    for part in text:
+        lines += [line for line in part.split("\n") if line.strip()]
     for line in lines:
         if len(fio.findall(line)) > 1:
             trouble_counter += 1
     if trouble_counter != 0:
-        lines = [line for line in text.split("\n") if line.strip()]
-    return lines
+        for part in text:
+            lines = [line for line in part.split(",") if line.strip()]
+    return lines  
 
 def meta_lines(path):
-    lines = splitting_text(path)
+    lines = splitting_text(path) 
     add_meta = []
-    for i, line in enumerate(lines):
-        if "защитник" in line.lower() or "адвокат" in line.lower():
+    for i, line in enumerate(lines):  
+        if "защитник" in line.lower() or "адвокат" in line.lower(): 
             if fio.findall(line):
-                add_meta.append(("advocate", line))
+                add_meta.append(("advocate", line)) 
             else:
-                add_meta.append(("advocate", line+lines[i+1]))
-        if "прокурор" in line.lower() or "обвинител" in line.lower():
+                add_meta.append(("advocate", line+lines[i+1])) 
+        if "прокурор" in line.lower() or "обвинител" in line.lower():  
             if fio.findall(line):
-                add_meta.append(("prosecutor", line))
+                add_meta.append(("prosecutor", line)) 
             else:
-                add_meta.append(("prosecutor", line+lines[i+1]))
+                add_meta.append(("prosecutor", line+lines[i+1]))  
         if "секретар" in line.lower():
             if fio.findall(line):
-                add_meta.append(("secretary", line))
+                add_meta.append(("secretary", line)) 
             else:
-                add_meta.append(("secretary", line+lines[i+1]))
+                add_meta.append(("secretary", line+lines[i+1])) 
         if "подсудим" in line.lower() or "в отношении" in line.lower():
-            if fio.findall(line):
-                add_meta.append(("accused", line))
+            if fio_cifer.findall(line):
+                add_meta.append(("accused", line)) 
+            elif fio.findall(line):
+                add_meta.append(("accused", line)) 
             else:
                 if i+1 < len(lines):
-                    add_meta.append(("accused", line+lines[i+1]))
+                    add_meta.append(("accused", line+lines[i+1])) 
     return add_meta
 
 def get_meta_names(meta_lines):
     meta_names = []
-    for line in meta_lines:
-        matches = extractor(line[1])
-        if matches:
-            try:
-                for match in matches:
-                    fact = match.fact.as_json
-                    meta_names.append((line[0], (fact["last"].capitalize()+" "+fact["first"]+"."+fact["middle"]+".")))
-            except KeyError:
-                if fio.findall(line[1]):
-                    meta_names.append((line[0], fio.findall(line[1])[0]))
-        elif fio.findall(line[1]):
-            meta_names.append((line[0], fio.findall(line[1])[0]))
+    for line in meta_lines:         
+        matches = extractor(line[1]) 
+        if line[0] == "accused":
+            if fio_cifer.findall(line[1]):
+                meta_names.append((line[0], fio_cifer.findall(line[1])[0]))
+            elif matches:
+                try:
+                    for match in matches:
+                        fact = match.fact.as_json 
+                        meta_names.append((line[0], (fact["last"].capitalize()+" "+fact["first"]+"."+fact["middle"]+".")))
+                except KeyError:
+                    if fio.findall(line[1]): 
+                        meta_names.append((line[0], fio.findall(line[1])[0]))
+            elif fio.findall(line[1]): 
+                meta_names.append((line[0], fio.findall(line[1])[0]))
+        else:
+            if matches:
+                try:
+                    for match in matches:
+                        fact = match.fact.as_json 
+                        meta_names.append((line[0], (fact["last"].capitalize()+" "+fact["first"]+"."+fact["middle"]+".")))
+                except KeyError:
+                    if fio.findall(line[1]): 
+                        meta_names.append((line[0], fio.findall(line[1])[0]))
+            elif fio.findall(line[1]): 
+                meta_names.append((line[0], fio.findall(line[1])[0]))
     return meta_names
 
 def names_to_meta(path):
