@@ -6,13 +6,15 @@ extractor = NamesExtractor()
 import re
 #регулярка для имён
 fio = re.compile("[А-ЯЁ][а-яё]+ [А-ЯЁ]\.[А-ЯЁ]\.")
+fio_cifer = re.compile("[А-ЯЁ][а-яё]+ ФИО[0-9]{1,3}")
+fio_short = re.compile("ФИО[0-9]{1,3}")
 import pandas as pd
 
 
 def parse_xml(path):  # парсим xml
-    meta_data = {'number': path.split("/")[-1], 'court': 'not_found', 'judge': 'not_found', 'prosecutor': 'not_found',
-                 'advocate': 'not_found', 'secretary': 'not_found', 'accused': 'not_found', 'result': 'not_found',
-                 'category': 'not_found'}
+    meta_data = {'number': path.split("/")[-1], 'court': 'not found', 'judge': 'not found', 'prosecutor': 'not found',
+                 'advocate': 'not found', 'secretary': 'not found', 'accused': 'not found', 'result': 'not found',
+                 'category': 'not found'}
     with open(path, 'r', encoding='utf-8')as f:
         soup = BeautifulSoup(f.read(), 'html.parser')
         meta_data['court'] = soup.court.string  # добавляем в метаданные то, что имеется в разметке
@@ -60,76 +62,76 @@ def get_names(line):
     return name
 
 def splitting_text(path):
-    lines = []
     trouble_counter = 0
     text = get_parts(parse_xml(path)[1])[1]
-    text = text.split("с участием")
-    for part in text:
-        lines += [line for line in part.split("\n") if line.strip()]
+    lines = [line for line in text.split(",") if line.strip()]
     for line in lines:
         if len(fio.findall(line)) > 1:
             trouble_counter += 1
     if trouble_counter != 0:
-        for part in text:
-            lines = [line for line in part.split(",") if line.strip()]
-    return lines  
+        lines = [line for line in text.split("\n") if line.strip()]
+    return lines
 
 def meta_lines(path):
-    lines = splitting_text(path) 
+    lines = splitting_text(path)
     add_meta = []
-    for i, line in enumerate(lines):  
-        if "защитник" in line.lower() or "адвокат" in line.lower(): 
+    for i, line in enumerate(lines):
+        if "защитник" in line.lower() or "адвокат" in line.lower():
             if fio.findall(line):
-                add_meta.append(("advocate", line)) 
+                add_meta.append(("advocate", line))
             else:
-                add_meta.append(("advocate", line+lines[i+1])) 
-        if "прокурор" in line.lower() or "обвинител" in line.lower():  
+                add_meta.append(("advocate", line+lines[i+1]))
+        if "прокурор" in line.lower() or "обвинител" in line.lower():
             if fio.findall(line):
-                add_meta.append(("prosecutor", line)) 
+                add_meta.append(("prosecutor", line))
             else:
-                add_meta.append(("prosecutor", line+lines[i+1]))  
+                add_meta.append(("prosecutor", line+lines[i+1]))
         if "секретар" in line.lower():
             if fio.findall(line):
-                add_meta.append(("secretary", line)) 
+                add_meta.append(("secretary", line))
             else:
-                add_meta.append(("secretary", line+lines[i+1])) 
+                add_meta.append(("secretary", line+lines[i+1]))
         if "подсудим" in line.lower() or "в отношении" in line.lower():
             if fio_cifer.findall(line):
-                add_meta.append(("accused", line)) 
+                add_meta.append(("accused", line))
+            elif fio_short.findall(line):
+                add_meta.append(("accused", line))
             elif fio.findall(line):
-                add_meta.append(("accused", line)) 
+                add_meta.append(("accused", line))
             else:
                 if i+1 < len(lines):
-                    add_meta.append(("accused", line+lines[i+1])) 
+                    add_meta.append(("accused", line+lines[i+1]))
     return add_meta
 
 def get_meta_names(meta_lines):
     meta_names = []
-    for line in meta_lines:         
-        matches = extractor(line[1]) 
+    for line in meta_lines:
+        matches = extractor(line[1])
         if line[0] == "accused":
             if fio_cifer.findall(line[1]):
                 meta_names.append((line[0], fio_cifer.findall(line[1])[0]))
+            elif fio_short.findall(line[1]):
+                meta_names.append((line[0], fio_short.findall(line[1])[0]))
             elif matches:
                 try:
                     for match in matches:
-                        fact = match.fact.as_json 
-                        meta_names.append((line[0], (fact["last"].capitalize()+" "+fact["first"]+"."+fact["middle"]+".")))
+                        fact = match.fact.as_json
+                        meta_names.append((line[0], (fact["last"].capitalize()+" "+fact["first"][0].upper()+"."+fact["middle"][0].upper()+".")))
                 except KeyError:
-                    if fio.findall(line[1]): 
+                    if fio.findall(line[1]):
                         meta_names.append((line[0], fio.findall(line[1])[0]))
-            elif fio.findall(line[1]): 
+            elif fio.findall(line[1]):
                 meta_names.append((line[0], fio.findall(line[1])[0]))
         else:
             if matches:
                 try:
                     for match in matches:
-                        fact = match.fact.as_json 
-                        meta_names.append((line[0], (fact["last"].capitalize()+" "+fact["first"]+"."+fact["middle"]+".")))
+                        fact = match.fact.as_json
+                        meta_names.append((line[0], (fact["last"].capitalize()+" "+fact["first"][0].upper()+"."+fact["middle"][0].upper()+".")))
                 except KeyError:
-                    if fio.findall(line[1]): 
+                    if fio.findall(line[1]):
                         meta_names.append((line[0], fio.findall(line[1])[0]))
-            elif fio.findall(line[1]): 
+            elif fio.findall(line[1]):
                 meta_names.append((line[0], fio.findall(line[1])[0]))
     return meta_names
 
@@ -153,6 +155,32 @@ def names_to_meta(path):
     for name in updated_names:
         meta_data[name[0]] = name[1]
     return meta_data
+
+def killing_doubles(path):
+    names_dict = names_to_meta(path)
+    no_doubles_dict = {}
+    for role in names_dict:
+        if type(names_dict[role]) == str:
+            names_list = names_dict[role].split(",")
+            if "," in names_dict[role]:
+                for n, name in enumerate(names_list):
+                    if fio.findall(name):
+                        if n > 0 and name.split()[1] == names_list[n-1].split()[1]  and name.split()[0][:len(name.split()[0])-2] == names_list[n-1].split()[0][0:len(name.split()[0])-2]:
+                            names_list.pop(n)
+            no_doubles_dict[role] = names_list
+        else:
+            no_doubles_dict[role] = [names_dict[role]]
+    return no_doubles_dict
+
+def final_meta(path):
+    dict_with_lists = killing_doubles(path)
+    final_meta_dict = {}
+    for role in dict_with_lists:
+        if len(dict_with_lists[role]) == 1:
+            final_meta_dict[role] = dict_with_lists[role][0]
+        else:
+            final_meta_dict[role] = ",".join(dict_with_lists[role])
+    return final_meta_dict
 
 
 
