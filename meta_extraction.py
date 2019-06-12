@@ -10,6 +10,14 @@ fio_cifer = re.compile("[А-ЯЁ][а-яё]+ ФИО[0-9]{1,3}")
 fio_short = re.compile("ФИО[0-9]{1,3}")
 import pandas as pd
 
+def get_paths(folder_path):
+    paths = []
+    for root, dirs, files in os.walk(folder_path):
+        for _file in files:
+            if 'xml' in _file:
+                res = os.path.join(os.path.abspath(root), _file)
+                paths.append(res)
+    return paths
 
 def parse_xml(path):  # парсим xml
     meta_data = {'number': path.split("/")[-1], 'court': 'not found', 'judge': 'not found', 'prosecutor': 'not found',
@@ -41,7 +49,9 @@ def open_with_xml(path):
 
 def get_parts(text):    # делим на части
     lines = [line for line in text.split('\n')]
-    beg, end = 0, 0
+    beg, end = 0, 0 
+    # Объявляем здесь переменные, чтобы в return не ругался на возврат локальных
+    beginning, main_part, ending = [], [], []
     for num, line in enumerate(lines):
         if 'установил' in line.lower() or 'у с т а н о в и л' in line.lower():
             beg = num + 1
