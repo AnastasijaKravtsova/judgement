@@ -17,12 +17,17 @@ persons_meta = ["judge", "prosecutor", "advocate", "accused", "secretary"]
 
 #прячет отдельную "роль" -- адвоката, обвиняемого и т.п.
 def person_hider(path, text, role):
-    names = [name.strip(" ") for name in names_to_meta(path)[role].split(",")]
+    names = [name.strip(" ") for name in names_to_meta(path)[role].split(",")] 
+    print (names_to_meta(path))
+    print (names)
     for name in names:
         role_word = role.upper()
-        name_to_split = name.split(" ")
-        name_variations = name_to_split[0][0:-2] + r"[a-яё]{1,5}" + " " + name_to_split[1]
-        text = re.sub(name_variations, role_word, text)
+        if fio.findall(name) or fio_cifer.findall(name):
+            name_to_split = name.split(" ")
+            name_variations = name_to_split[0][0:-2] + r"[a-яё]{1,5}" + " " + name_to_split[1]
+            text = re.sub(name_variations, role_word, text)
+        elif fio_short.findall(name):  
+            text = re.sub(name, role_word, text)
     return text
 
 #прячет все роли из ролей в тексте
