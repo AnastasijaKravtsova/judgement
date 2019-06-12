@@ -32,7 +32,10 @@ https://docs.google.com/spreadsheets/d/1oT0ytEouY_lP88KTRRGP-RJZBKslRudJk7iLxp4d
 
 [~10 млн. неразмеченных приговоров](https://www.dropbox.com/sh/3h6fpq94z8ljt8z/AACl_c5wAE6a4uQt9Zhy2iXQa?dl=0&preview=sou.tar)
 
+[Здесь](https://drive.google.com/drive/folders/1glH5lR06mwtLm_bHo-in1D-Km7Fk-jPp) лежат только уголовные дела, выделенные скриптом из 10 миллионов
+
 [~1.5 тыс. размеченных дел](https://www.dropbox.com/sh/31j60nca3u20uwb/AABMZ_honfEUDoEDHA788PUja?dl=0)
+
 
 #### Участники проекта
 
@@ -44,7 +47,9 @@ https://docs.google.com/spreadsheets/d/1oT0ytEouY_lP88KTRRGP-RJZBKslRudJk7iLxp4d
 ###### Тимлидер проекта сменяется каждые 2 месяца:
 
 - ноябрь+декабрь: Кравцова Анастасия
-- январь+февраль, март+апрель, май+июнь: TBA
+- январь+февраль: Подрядчикова Мария
+- март+апрель: Решетникова Арина
+- май+июнь: Давыдова Вера
 
 #### Кураторы проекта
 
