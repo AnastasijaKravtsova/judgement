@@ -3,6 +3,16 @@
 
 ### О проекте
 
+#### ТЗ
+
+Текст:
+
+https://docs.google.com/document/d/1i3k533W2JMMCCtro5mtgx0lStA497h1cLaNosHvdeJM/edit
+
+Таблица с этапами:
+
+https://docs.google.com/spreadsheets/d/1oT0ytEouY_lP88KTRRGP-RJZBKslRudJk7iLxp4dC7k/edit#gid=0
+
 #### Цели и материалы проекта
 
 ###### Основная цель проекта
@@ -41,21 +51,8 @@
 - Андрей Заякин:  a.zayakin@gmail.com
 - Михаил Копотев: mihail.kopotev@gmail.com
 
-#### Ближайшие задачи
-
-##### ~~15.11.2018: оформление гитхаба~~
-
-##### 21.11.2018: подготовка и сдача презентации для выступления на НИСе
-
-Подготовка презентации происходит [здесь](https://drive.google.com/drive/folders/1mWKQJaFDM0sAwwOXW9AuoBrnDmzPBnZ8)
-
-##### 23.11.2018: выступление на НИСе про видение проекта:
-
-- Арина: цели и материалы
-- Вера: похожие проекты
-- Маша: трудности и риски
-- Настя: статья
+#### Время созвона: понедельник, между 9 и 10 вечера
 
 #### Отчетность
 
-* [05.11 -- первый созвон с кураторами](reports/report_05112018.md)
+Отчеты хранятся [здесь](https://github.com/AnastasijaKravtsova/judgement/blob/master/reports)
