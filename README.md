@@ -5,11 +5,15 @@
 
 #### ТЗ
 
-Текст:
+Весенний вариант:
+
+https://docs.google.com/document/d/1DPHw2YsJA37gWg44j5Nb-DaFR9xS6tTGv9b7i7b0BN0/edit
+
+Зимний вариант:
 
 https://docs.google.com/document/d/1i3k533W2JMMCCtro5mtgx0lStA497h1cLaNosHvdeJM/edit
 
-Таблица с этапами:
+Зимняя таблица с этапами:
 
 https://docs.google.com/spreadsheets/d/1oT0ytEouY_lP88KTRRGP-RJZBKslRudJk7iLxp4dC7k/edit#gid=0
 
@@ -55,8 +59,6 @@ https://docs.google.com/spreadsheets/d/1oT0ytEouY_lP88KTRRGP-RJZBKslRudJk7iLxp4d
 
 - Андрей Заякин:  a.zayakin@gmail.com
 - Михаил Копотев: mihail.kopotev@gmail.com
-
-#### Время созвона: понедельник, между 9 и 10 вечера
 
 #### Отчетность
 
