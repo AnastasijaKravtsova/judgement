@@ -3,6 +3,10 @@
 
 ### О проекте
 
+#### Статья
+
+[Статья (июнь 2019)](https://github.com/AnastasijaKravtsova/judgement/blob/master/judgment_paper.pdf)
+
 #### ТЗ
 
 Весенний вариант:
